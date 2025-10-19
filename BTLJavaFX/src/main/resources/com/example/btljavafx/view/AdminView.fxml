@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox xmlns="http://javafx.com/javafx/8"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.btljavafx.controller.AdminController"
+      spacing="10" alignment="CENTER" styleClass="light-bg" prefWidth="700">
+
+    <Label text="Trang quản lý" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+    <TabPane fx:id="tabPane" prefHeight="500" prefWidth="650">
+
+        <Tab text="Nhân viên">
+            <VBox spacing="10" alignment="CENTER">
+                <TableView fx:id="tvNhanVien" prefHeight="350" prefWidth="600">
+                    <columns>
+                        <TableColumn text="Tên" prefWidth="200" fx:id="colName" />
+                        <TableColumn text="Chức vụ" prefWidth="200" fx:id="colRole" />
+                    </columns>
+                </TableView>
+
+                <HBox spacing="10" alignment="CENTER">
+                    <Button text="Thêm nhân viên" onAction="#handleAddEmployee"/>
+                    <Button text="Chỉnh sửa thông tin" onAction="#handleEditEmployee"/>
+                    <Button text="Xóa nhân viên" onAction="#handleDeleteEmployee"/>
+                </HBox>
+            </VBox>
+        </Tab>
+
+        <Tab text="Nhật ký hoạt động">
+            <VBox spacing="10" alignment="CENTER">
+                <Button text="Làm mới" onAction="#handleRefreshLogs"/>
+                <TableView fx:id="tableLogs" prefWidth="750" prefHeight="500">
+                    <columns>
+                        <TableColumn fx:id="colTime" text="Thời gian" prefWidth="200"/>
+                        <TableColumn fx:id="colUser" text="Người thực hiện" prefWidth="150"/>
+                        <TableColumn fx:id="colAction" text="Hành động" prefWidth="400"/>
+                    </columns>
+                </TableView>
+            </VBox>
+        </Tab>
+
+    </TabPane>
+
+    <Button text="Đăng xuất" onAction="#handleLogout"/>
+</VBox>
