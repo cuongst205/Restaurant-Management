@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.btljavafx.controller.FoodController" spacing="10">
+
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+
+    <HBox spacing="10">
+        <TextField fx:id="txtName" promptText="Name"/>
+        <TextField fx:id="txtPrice" promptText="Price"/>
+        <Button text="Add Food" onAction="#addFood"/>
+        <Button text="Delete Selected" onAction="#deleteFood"/>
+    </HBox>
+
+    <TableView fx:id="tableFood" prefHeight="400">
+        <columns>
+            <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
+            <TableColumn fx:id="colName" text="Name" prefWidth="200"/>
+            <TableColumn fx:id="colPrice" text="Price" prefWidth="100"/>
+        </columns>
+    </TableView>
+
+</VBox>
