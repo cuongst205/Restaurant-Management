@@ -13,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Table;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -88,6 +89,10 @@ public class AdminController {
         DSNhanVien = NhanVienDAO.getAll();
         tvNhanVien.getColumns().clear();
 
+        TableColumn<NhanVien, String> IDCol = new TableColumn<>("ID");
+        IDCol.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getid_Nhan_Vien_PK()));
+        IDCol.setPrefWidth(100);
+
         TableColumn<NhanVien, String> nameCol = new TableColumn<>("Họ tên");
         nameCol.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getHoTen()));
         nameCol.setPrefWidth(200);
@@ -96,7 +101,7 @@ public class AdminController {
         roleCol.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getChucVu()));
 
         tvNhanVien.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
-        tvNhanVien.getColumns().addAll(nameCol, roleCol);
+        tvNhanVien.getColumns().addAll(IDCol, nameCol, roleCol);
         tvNhanVien.setItems(DSNhanVien);
     }
 

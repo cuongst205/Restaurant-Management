@@ -14,6 +14,7 @@
             <VBox spacing="10" alignment="CENTER">
                 <TableView fx:id="tvNhanVien" prefHeight="350" prefWidth="600">
                     <columns>
+                        <TableColumn text="id_Nhan_Vien_PK" prefWidth="100" fx:id="colID" />
                         <TableColumn text="Tên" prefWidth="200" fx:id="colName" />
                         <TableColumn text="Chức vụ" prefWidth="200" fx:id="colRole" />
                     </columns>
