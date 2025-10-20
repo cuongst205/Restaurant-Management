@@ -31,7 +31,8 @@ public class LoginController {
             try {
                 if (emp.isAdmin()) {
                     AdminController.setCurrentAdmin(emp.getHoTen());
-                    Main.switchScene("/com/example/btljavafx/view/AdminView.fxml");
+//                    Main.switchScene("/com/example/btljavafx/view/AdminView.fxml");
+                    Main.switchScene("/com/example/btljavafx/view/food.fxml");
                 } else {
 //                    Main.switchScene("/com/example/btljavafx/view/OrderView.fxml");
                 }
