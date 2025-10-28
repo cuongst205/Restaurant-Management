@@ -1,18 +1,18 @@
 package com.example.btljavafx.utils.dao;
 
 import com.example.btljavafx.model.NhanVien;
+import com.example.btljavafx.utils.DatabaseConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.*;
 import java.util.Optional;
 
-public class NhanVienDAO extends GenericDAO<NhanVien> {
+public class NhanVienDAO {
 
-    @Override
     public void insert(NhanVien e) {
         String sql = "INSERT INTO \"Nhân Viên\" VALUES (?, ?, ?, ?)";
-        try (Connection conn = getConnection();
+        try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, e.getid_Nhan_Vien_PK());
             stmt.setString(2, e.getHoTen());
@@ -25,10 +25,9 @@ public class NhanVienDAO extends GenericDAO<NhanVien> {
         }
     }
 
-    @Override
     public boolean update(NhanVien e) {
         String sql = "UPDATE \"Nhân Viên\" SET \"Họ tên\"=?, \"Chức vụ\"=?, \"Mật khẩu\"=? WHERE id_Nhan_Vien_PK=?";
-        try (Connection conn = getConnection();
+        try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, e.getHoTen());
@@ -43,10 +42,9 @@ public class NhanVienDAO extends GenericDAO<NhanVien> {
         }
     }
 
-    @Override
     public void delete(String id_Nhan_Vien_PK) {
         String sql = "DELETE FROM \"Nhân Viên\" WHERE id_Nhan_Vien_PK=?";
-        try (Connection conn = getConnection();
+        try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, id_Nhan_Vien_PK);
             stmt.executeUpdate();
@@ -55,12 +53,11 @@ public class NhanVienDAO extends GenericDAO<NhanVien> {
         }
     }
 
-    @Override
     public ObservableList<NhanVien> getAll() {
         ObservableList<NhanVien> list = FXCollections.observableArrayList();
         String sql = "SELECT * FROM \"Nhân Viên\"";
 
-        try (Connection conn = getConnection();
+        try (Connection conn = DatabaseConnection.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -78,10 +75,9 @@ public class NhanVienDAO extends GenericDAO<NhanVien> {
         return list;
     }
 
-    @Override
     public NhanVien getById(String id) {
         String sql = "SELECT * FROM \"Nhân Viên\" WHERE id_Nhan_Vien_PK=?";
-        try (Connection conn = getConnection();
+        try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, id);
             ResultSet rs = stmt.executeQuery();
@@ -101,7 +97,7 @@ public class NhanVienDAO extends GenericDAO<NhanVien> {
 
     public Optional<NhanVien> findByCredentials(String username, String password) {
         String sql = "SELECT * FROM \"Nhân Viên\" WHERE \"id_Nhan_Vien_PK\"=? AND \"Mật khẩu\"=?";
-        try (Connection conn = getConnection();
+        try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, username);
             stmt.setString(2, password);
