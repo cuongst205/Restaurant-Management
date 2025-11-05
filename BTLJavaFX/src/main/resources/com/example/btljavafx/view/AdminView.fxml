@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox xmlns="http://javafx.com/javafx/8"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.btljavafx.controller.AdminController"
+      spacing="10" alignment="CENTER" styleClass="light-bg" prefWidth="700">
+
+    <Label text="Trang quản lý" styleClass="title"/>
+
+    <TabPane fx:id="tabPane" prefHeight="500" prefWidth="650">
+
+        <Tab text="Nhân viên">
+            <VBox spacing="10" alignment="CENTER">
+                <TableView fx:id="tvNhanVien" prefHeight="350" prefWidth="600">
+                    <columns>
+                        <TableColumn text="id_Nhan_Vien_PK" prefWidth="100" fx:id="colID" />
+                        <TableColumn text="Tên" prefWidth="200" fx:id="colName" />
+                        <TableColumn text="Chức vụ" prefWidth="200" fx:id="colRole" />
+                    </columns>
+                </TableView>
+
+                <HBox spacing="10" alignment="CENTER">
+                    <Button text="Thêm nhân viên" onAction="#handleAddEmployee" styleClass="primary-btn"/>
+                    <Button text="Chỉnh sửa thông tin" onAction="#handleEditEmployee"/>
+                    <Button text="Xóa nhân viên" onAction="#handleDeleteEmployee" styleClass="danger-btn"/>
+                </HBox>
+            </VBox>
+        </Tab>
+
+        <Tab text="Nhật ký hoạt động">
+            <VBox spacing="10" alignment="CENTER">
+                <Button text="Làm mới" onAction="#handleRefreshLogs" styleClass="primary-btn"/>
+                <TableView fx:id="tableLogs" prefWidth="750" prefHeight="500">
+                    <columns>
+                        <TableColumn fx:id="colTime" text="Thời gian" prefWidth="200"/>
+                        <TableColumn fx:id="colUser" text="Người thực hiện" prefWidth="150"/>
+                        <TableColumn fx:id="colAction" text="Hành động" prefWidth="400"/>
+                    </columns>
+                </TableView>
+            </VBox>
+        </Tab>
+
+        <Tab text="Thiết lập thanh toán">
+            <VBox spacing="10" alignment="CENTER_LEFT" styleClass="light-bg" prefWidth="600">
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Lương/ngày(VND):" />
+                    <TextField fx:id="wage" promptText="Nhập lương/1h     " prefWidth="300" />
+                </HBox>
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Số tài khoản:          " />
+                    <TextField fx:id="txtAccountNumber" promptText="Nhập số tài khoản" prefWidth="300" />
+                </HBox>
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Chủ tài khoản:       " />
+                    <TextField fx:id="txtAccountName" promptText="Nhập tên chủ tài khoản (tuỳ chọn)" prefWidth="300" />
+                </HBox>
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label text="Ngân hàng:            " />
+                    <ComboBox fx:id="cbBank" prefWidth="300" promptText="Chọn ngân hàng" />
+                </HBox>
+
+                <Button text="Lưu" onAction="#handleSavePayment" styleClass="primary-btn" />
+            </VBox>
+
+        </Tab>
+        <Tab text="Xuất báo cáo">
+            <VBox spacing="15" alignment="CENTER">
+                <Button text="Xuất báo cáo tháng này" onAction="#exportReport" styleClass="primary-btn"/>
+<!--                <TableView fx:id="report" prefWidth="750" prefHeight="500">-->
+<!--&lt;!&ndash;                    <columns>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <TableColumn fx:id="colTime" text="Thời gian" prefWidth="200"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <TableColumn fx:id="colUser" text="Người thực hiện" prefWidth="150"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <TableColumn fx:id="colAction" text="Hành động" prefWidth="400"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </columns>&ndash;&gt;-->
+<!--                </TableView>-->
+            </VBox>
+        </Tab>
+
+    </TabPane>
+
+    <Button text="Đăng xuất" onAction="#handleLogout"/>
+</VBox>

@@ -1,0 +1,91 @@
+.light-bg {
+    -fx-background-color: linear-gradient(to bottom, #FFFFFF, #F7F9FC);
+    -fx-padding: 24;
+    -fx-font-family: "Segoe UI", "Arial";
+    -fx-font-size: 14px;
+    -fx-text-fill: #333333;
+}
+
+.title {
+    -fx-font-size: 24px;
+    -fx-text-fill: #1F2937;
+    -fx-font-weight: bold;
+}
+
+.subtitle {
+    -fx-font-size: 14px;
+    -fx-text-fill: #6B7280;
+}
+
+/* Base button */
+.button {
+    -fx-background-color: #E5E7EB;
+    -fx-text-fill: #111827;
+    -fx-padding: 8 14;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+.button:hover { -fx-background-color: #D1D5DB; }
+.button:pressed { -fx-background-color: #9CA3AF; }
+
+.primary-btn {
+    -fx-background-color: #1976D2;
+    -fx-text-fill: white;
+    -fx-padding: 8 16;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+}
+.primary-btn:hover { -fx-background-color: #1565C0; }
+.primary-btn:pressed { -fx-background-color: #0D47A1; }
+
+.danger-btn { 
+    -fx-background-color: #E53935; 
+    -fx-text-fill: white; 
+    -fx-background-radius: 8;
+}
+.danger-btn:hover { -fx-background-color: #D32F2F; }
+.danger-btn:pressed { -fx-background-color: #B71C1C; }
+
+/* Inputs */
+.text-field, .password-field { 
+    -fx-background-color: #FFFFFF; 
+    -fx-background-insets: 0; 
+    -fx-background-radius: 8; 
+    -fx-padding: 8 12; 
+    -fx-border-color: #E5E7EB; 
+    -fx-border-radius: 8; 
+}
+.text-field:focused, .password-field:focused { 
+    -fx-border-color: #1976D2; 
+    -fx-effect: dropshadow(gaussian, rgba(25,118,210,0.25), 8, 0.2, 0, 0); 
+}
+
+/* Table styling */
+.table-view {
+    -fx-background-color: white;
+    -fx-background-radius: 8;
+    -fx-border-color: #E5E7EB;
+    -fx-border-radius: 8;
+}
+.table-view .column-header-background { -fx-background-color: #F3F4F6; }
+.table-view .column-header, .table-view .filler { -fx-size: 34px; }
+.table-view .table-row-cell:filled:selected { -fx-background-color: #BBDEFB; }
+.table-view .table-row-cell:hover { -fx-background-color: #F1F5F9; }
+
+/* Trạng thái bàn ăn */
+.button.table-free {
+    -fx-background-color: #e0f2f1;
+    -fx-text-fill: #00695c;
+    -fx-font-weight: bold;
+}
+.button.table-occupied {
+    -fx-background-color: #ffecb3;
+    -fx-text-fill: #8d6e63;
+    -fx-font-weight: bold;
+}
+.button.table-current {
+    -fx-background-color: #64b5f6;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
