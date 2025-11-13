@@ -1,6 +1,8 @@
 package com.example.btljavafx.model;
 
+import com.example.btljavafx.utils.dao.NhanVienDAO;
 import com.example.btljavafx.utils.dao.SettingsDAO;
+import javafx.util.Pair;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -12,7 +14,7 @@ import java.util.Map;
 //import static com.example.btljavafx.controller.AdminController.getAbsPath;
 
 public class ExportExcel {
-    public ExportExcel(String month, Map<String, Double> employees) {
+    public ExportExcel(String month, Map<String, Pair<String, Double>> employees) {
         SettingsDAO settings = new SettingsDAO();
         double wage = Double.parseDouble(settings.get("PAYMENT_WAGE"));
         String path = settings.get("REPORT_PATH");
@@ -50,16 +52,33 @@ public class ExportExcel {
         row5.createCell(0).setCellValue("Báo cáo số giờ làm việc");
         Row colRow = sheet.createRow(rowNum++);
         colRow.createCell(0).setCellValue("ID Nhân Viên");
-        colRow.createCell(1).setCellValue("Số ngày làm");
-        colRow.createCell(2).setCellValue("Thuế thu nhập 10%");
+        colRow.createCell(1).setCellValue("Tên nhân viên");
+        colRow.createCell(2).setCellValue("Số ngày làm");
+        colRow.createCell(3).setCellValue("Thuế thu nhập 10%");
 //        colRow.createCell(3).setCellValue("Thưởng");
-        colRow.createCell(3).setCellValue("Tổng nhận");
-        for (Map.Entry<String, Double> entry : employees.entrySet()) {
+        colRow.createCell(4).setCellValue("Tổng nhận");
+        colRow.createCell(5).setCellValue("Tên ngân hàng");
+        colRow.createCell(6).setCellValue("STK");
+        NhanVienDAO nhanVienDAO = new NhanVienDAO();
+        for (Map.Entry<String, Pair<String, Double>> entry : employees.entrySet()) {
             Row row = sheet.createRow(rowNum++);
             row.createCell(0).setCellValue(entry.getKey());
-            row.createCell(1).setCellValue(entry.getValue());
-            row.createCell(2).setCellValue(entry.getValue() * 0.1 * wage);
-            row.createCell(3).setCellValue(entry.getValue() * wage - entry.getValue() * wage * 0.1);
+            Pair<String, Double> nameAndCnt = entry.getValue();
+            String name = nameAndCnt.getKey();
+            double cnt = nameAndCnt.getValue();
+
+
+
+
+            row.createCell(1).setCellValue(name);
+            row.createCell(2).setCellValue(cnt);
+
+
+            row.createCell(3).setCellValue(cnt * 0.1 * wage);
+            row.createCell(4).setCellValue(cnt * wage - cnt * wage * 0.1);
+            row.createCell(5).setCellValue(nhanVienDAO.getById(entry.getKey()).getBankName());
+            row.createCell(6).setCellValue(nhanVienDAO.getById(entry.getKey()).getNumAccount());
+
         }
 //        for (Map.Entry<String, Double> entry : employees.entrySet()) {
 //            System.out.println(entry.getKey() + " : " + entry.getValue());

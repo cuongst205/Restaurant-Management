@@ -1,5 +1,5 @@
 .light-bg {
-    -fx-background-color: linear-gradient(to bottom, #FFFFFF, #F7F9FC);
+    -fx-background-color: #FFFFFF;
     -fx-padding: 24;
     -fx-font-family: "Segoe UI", "Arial";
     -fx-font-size: 14px;
@@ -38,26 +38,26 @@
 .primary-btn:hover { -fx-background-color: #1565C0; }
 .primary-btn:pressed { -fx-background-color: #0D47A1; }
 
-.danger-btn { 
-    -fx-background-color: #E53935; 
-    -fx-text-fill: white; 
+.danger-btn {
+    -fx-background-color: #E53935;
+    -fx-text-fill: white;
     -fx-background-radius: 8;
 }
 .danger-btn:hover { -fx-background-color: #D32F2F; }
 .danger-btn:pressed { -fx-background-color: #B71C1C; }
 
 /* Inputs */
-.text-field, .password-field { 
-    -fx-background-color: #FFFFFF; 
-    -fx-background-insets: 0; 
-    -fx-background-radius: 8; 
-    -fx-padding: 8 12; 
-    -fx-border-color: #E5E7EB; 
-    -fx-border-radius: 8; 
+.text-field, .password-field {
+    -fx-background-color: #FFFFFF;
+    -fx-background-insets: 0;
+    -fx-background-radius: 8;
+    -fx-padding: 8 12;
+    -fx-border-color: #E5E7EB;
+    -fx-border-radius: 8;
 }
-.text-field:focused, .password-field:focused { 
-    -fx-border-color: #1976D2; 
-    -fx-effect: dropshadow(gaussian, rgba(25,118,210,0.25), 8, 0.2, 0, 0); 
+.text-field:focused, .password-field:focused {
+    -fx-border-color: #1976D2;
+    -fx-effect: dropshadow(gaussian, rgba(25,118,210,0.25), 8, 0.2, 0, 0);
 }
 
 /* Table styling */

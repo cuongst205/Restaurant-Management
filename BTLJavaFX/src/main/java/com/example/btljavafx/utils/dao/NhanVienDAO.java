@@ -3,6 +3,7 @@ package com.example.btljavafx.utils.dao;
 import com.example.btljavafx.model.NhanVien;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.util.Pair;
 
 import java.sql.*;
 import java.util.*;
@@ -93,7 +94,7 @@ public class NhanVienDAO extends GenericDAO<NhanVien> {
             if (rs.next()) {
                 return new NhanVien(
                         rs.getString("id_employee"),
-                        rs.getString("Name"),
+                        rs.getString("name"),
                         rs.getString("role"),
                         rs.getString("password"),
                         rs.getString("bank_name"),
@@ -141,16 +142,17 @@ public class NhanVienDAO extends GenericDAO<NhanVien> {
             ex.printStackTrace();
         }
     }
-    public Map<String, Double> exportTimeSheet() {
-        Map<String, Double> map = new HashMap<>();
+    public Map<String, Pair<String, Double>> exportTimeSheet() {
+        Map<String, Pair<String, Double>> map = new HashMap<>();
         String sql = """
-                SELECT\s
+                SELECT
                     t.id_employee,
                     COUNT(DISTINCT strftime('%Y-%m-%d', t.time_login)) AS workdays_count
-                FROM time_sheet AS t
-                WHERE strftime('%Y-%m', t.time_login) = strftime('%Y-%m', 'now')
-                GROUP BY t.id_employee;
-                                      
+                FROM time_sheet AS t join employee AS e ON e.id_employee = t.id_employee
+                WHERE strftime('%Y', t.time_login) = strftime('%Y', 'now')
+                  AND strftime('%m', t.time_login) = strftime('%m', 'now')
+                 and e.role = 'Staff'
+                GROUP BY t.id_employee;                
                 """;
         try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -159,7 +161,8 @@ public class NhanVienDAO extends GenericDAO<NhanVien> {
             while (rs.next()) {
                 String id = rs.getString("id_employee");
                 double count = rs.getDouble("workdays_count");
-                map.put(id, count);
+                String name = getById(id).getHoTen();
+                map.put(id, new Pair<String, Double>(name, count));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

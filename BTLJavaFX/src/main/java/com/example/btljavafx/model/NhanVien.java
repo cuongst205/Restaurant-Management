@@ -119,6 +119,15 @@ public class NhanVien {
 
     public void setMatKhau(String MatKhau) {
         this.MatKhau = MatKhau;
+        String sql = "UPDATE employee SET password = ? WHERE id_employee = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, MatKhau);
+            stmt.setString(2, id_Nhan_Vien_PK);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
     public String getNumAccount() {
         return numAccount;

@@ -1,5 +1,5 @@
 package com.example.btljavafx.controller;
-
+import com.example.btljavafx.app.Main;
 import com.example.btljavafx.model.Bill;
 import com.example.btljavafx.model.Food;
 import com.example.btljavafx.model.OrderItem;
@@ -199,6 +199,14 @@ public class FoodController {
     public void getQRCode() {
 
     }
+//        @FXML
+//    public void logOut() {
+//        try {
+//            Main.switchScene("/com/example/btljavafx/view/LoginView.fxml");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     @FXML
     public void saveOrder() {
@@ -331,4 +339,21 @@ public class FoodController {
             btnPay.setDisable(list.isEmpty());
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

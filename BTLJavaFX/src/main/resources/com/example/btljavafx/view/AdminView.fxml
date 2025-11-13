@@ -17,6 +17,7 @@
                         <TableColumn text="id_Nhan_Vien_PK" prefWidth="100" fx:id="colID" />
                         <TableColumn text="Tên" prefWidth="200" fx:id="colName" />
                         <TableColumn text="Chức vụ" prefWidth="200" fx:id="colRole" />
+<!--                        <TableColumn text="STK Ngân Hàng" prefWidth="200" fx:id="colAccountNumber"/>-->
                     </columns>
                 </TableView>
 
@@ -67,13 +68,13 @@
         <Tab text="Xuất báo cáo">
             <VBox spacing="15" alignment="CENTER">
                 <Button text="Xuất báo cáo tháng này" onAction="#exportReport" styleClass="primary-btn"/>
-<!--                <TableView fx:id="report" prefWidth="750" prefHeight="500">-->
-<!--&lt;!&ndash;                    <columns>&ndash;&gt;-->
-<!--&lt;!&ndash;                        <TableColumn fx:id="colTime" text="Thời gian" prefWidth="200"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                        <TableColumn fx:id="colUser" text="Người thực hiện" prefWidth="150"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                        <TableColumn fx:id="colAction" text="Hành động" prefWidth="400"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                    </columns>&ndash;&gt;-->
-<!--                </TableView>-->
+                <!--                <TableView fx:id="report" prefWidth="750" prefHeight="500">-->
+                <!--&lt;!&ndash;                    <columns>&ndash;&gt;-->
+                <!--&lt;!&ndash;                        <TableColumn fx:id="colTime" text="Thời gian" prefWidth="200"/>&ndash;&gt;-->
+                <!--&lt;!&ndash;                        <TableColumn fx:id="colUser" text="Người thực hiện" prefWidth="150"/>&ndash;&gt;-->
+                <!--&lt;!&ndash;                        <TableColumn fx:id="colAction" text="Hành động" prefWidth="400"/>&ndash;&gt;-->
+                <!--&lt;!&ndash;                    </columns>&ndash;&gt;-->
+                <!--                </TableView>-->
             </VBox>
         </Tab>
 

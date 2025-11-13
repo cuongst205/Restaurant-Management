@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourcePerFileMappings">
-    <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/53cb9d3c-bed0-411f-b1c9-5f26e0a6bd36/console.sql" value="53cb9d3c-bed0-411f-b1c9-5f26e0a6bd36" />
     <file url="file://$PROJECT_DIR$/btljava1.sql" value="53cb9d3c-bed0-411f-b1c9-5f26e0a6bd36" />
+    <file url="file://$PROJECT_DIR$/test.sql" value="53cb9d3c-bed0-411f-b1c9-5f26e0a6bd36" />
   </component>
 </project>

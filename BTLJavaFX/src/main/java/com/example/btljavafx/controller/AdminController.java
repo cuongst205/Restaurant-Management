@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.util.Pair;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -30,6 +31,7 @@ public class AdminController {
     private final SettingsDAO settingsDAO = new SettingsDAO();
 
     @FXML private TableView<NhanVien> tvNhanVien;
+//    @FXML private TableView<Payment> stkNH;
     @FXML private TableView<LogEntry> tableLogs;
     @FXML private TableColumn<LogEntry, String> colTime;
     @FXML private TableColumn<LogEntry, String> colUser;
@@ -52,7 +54,6 @@ public class AdminController {
     @FXML
     public void initialize() {
         initNhanVien();
-
         colTime.setCellValueFactory(data -> data.getValue().timeProperty());
         colUser.setCellValueFactory(data -> data.getValue().userProperty());
         colAction.setCellValueFactory(data -> data.getValue().actionProperty());
@@ -83,6 +84,13 @@ public class AdminController {
             String savedWage = settingsDAO.get("PAYMENT_WAGE");
             if (savedWage != null) wage.setText(savedWage);
         }
+        txtAccountNumber.setTextFormatter(new TextFormatter<>(change -> {
+            String newText = change.getControlNewText();
+            if (newText.matches("\\d*")) {
+                return change;
+            }
+            return null;
+        }));
     }
 
     @FXML
@@ -151,7 +159,7 @@ public class AdminController {
     private void initNhanVien() {
         DSNhanVien = NhanVienDAO.getAll();
         tvNhanVien.getColumns().clear();
-
+//        stkNH.getColumns().clear();
         TableColumn<NhanVien, String> IDCol = new TableColumn<>("ID");
         IDCol.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getid_Nhan_Vien_PK()));
         IDCol.setPrefWidth(100);
@@ -183,6 +191,13 @@ public class AdminController {
         cbRole.getSelectionModel().select(0);
         ComboBox<String> cbBank = new ComboBox<>(FXCollections.observableArrayList(bank));
         cbBank.getSelectionModel().select(0);
+        numAccount.setTextFormatter(new TextFormatter<>(change -> {
+            String newText = change.getControlNewText();
+            if (newText.matches("\\d*")) {
+                return change;
+            }
+            return null;
+        }));
 
         GridPane grid = new GridPane();
         grid.setHgap(10);
@@ -199,7 +214,15 @@ public class AdminController {
         dlg.setResultConverter(btn -> {
             if (btn == ButtonType.OK) {
                 String hoTen = tfName.getText().trim();
+                if (hoTen.isEmpty()) {
+                    new Alert(Alert.AlertType.WARNING, "Vui lòng nhập Họ Tên").showAndWait();
+                    return null;
+                };
                 String pass = tfPass.getText().trim();
+                if (tfPass.getText().trim().isEmpty()) {
+                    new Alert(Alert.AlertType.WARNING, "Vui lòng nhập mật khẩu nhân viên").showAndWait();
+                    return null;
+                };
                 String role = cbRole.getValue();
                 String bankName = cbBank.getValue();
                 String accountNumber = numAccount.getText().trim();
@@ -215,6 +238,7 @@ public class AdminController {
                     "Thêm nhân viên: " + emp.getHoTen() +
                             " (" + emp.getChucVu() + "), ID = " + emp.getid_Nhan_Vien_PK());
         });
+
     }
 
     @FXML
@@ -234,8 +258,20 @@ public class AdminController {
     public void handleDeleteEmployee() {
         NhanVien emp = tvNhanVien.getSelectionModel().getSelectedItem();
         if (emp == null) return;
+        if (emp.getChucVu().equalsIgnoreCase("Manager")) {
+            long soManager = DSNhanVien.stream()
+                    .filter(e -> e.getChucVu().equalsIgnoreCase("Manager"))
+                    .count();
+
+            if (soManager == 1) {
+                new Alert(Alert.AlertType.WARNING, "Đây là Admin cuối cùng, không thể xoá!").showAndWait();
+                return;
+            }
+        }
+
         DSNhanVien.remove(emp);
         NhanVienDAO.delete(emp.getid_Nhan_Vien_PK());
+
 
         ActivityLogger.writeLog(currentAdminName, "Xóa nhân viên: " + emp.getHoTen());
     }
@@ -267,7 +303,7 @@ public class AdminController {
                 System.out.println("Người dùng chọn lưu tại: " + file.getAbsolutePath());
 //                getAbsPath = file.getAbsolutePath();
                 settingsDAO.set("REPORT_PATH", file.getAbsolutePath());
-                Map<String, Double> emp = NhanVienDAO.exportTimeSheet();
+                Map<String, Pair<String, Double>> emp = NhanVienDAO.exportTimeSheet();
                 ExportExcel exportExcel = new ExportExcel(String.valueOf(Calendar.getInstance().get(Calendar.MONTH) + 1), emp);
             }
         } catch (Exception ex) {
